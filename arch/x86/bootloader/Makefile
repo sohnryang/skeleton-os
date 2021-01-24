@@ -1,6 +1,6 @@
 all: clean loader.img
 
-run: all
+run: loader.img
 	qemu-system-i386 -drive format=raw,file=loader.img
 
 loader.img: loader.S
