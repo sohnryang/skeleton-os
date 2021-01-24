@@ -12,11 +12,12 @@ loader:
 	mov al, 0x00		; page should be 0
 	mov ah, 0x05		; set active page to 0
 	int 0x10
-	
+
 	call get_cursor_pos
 
-	mov cx, [ldmsg_len]	; message length
-	mov bp, ldmsg		; message address
+	mov cx, [ldmsg_len]
+	mov bp, ldmsg
+	mov bl, 0x0f		; color - white
 	call print_str
 
 	hlt
@@ -30,11 +31,9 @@ get_cursor_pos:
 print_str:
 	mov al, 0x01		; write mode
 	mov ah, 0x13		; tell 0x10 interrupt to write string
-	mov bl, 0x0f		; color - white
 	mov bh, 0x00		; page 0
 	int 0x10
 	ret
-	
 
 ldmsg db 'Loading OS... '
 ldmsg_len dw $ - ldmsg
