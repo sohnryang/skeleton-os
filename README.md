@@ -12,4 +12,4 @@ I cloned [torvalds/linux](https://github.com/torvalds/linux) a few weeks ago, an
 - Write most of the OS in C language for portability
   - Main target arch will be x86(-64) and ARM though
 - Should run on actual hardware such as Raspberry Pi
-- Feature basic OS elements like file system, such as file system and process scheduling.
+- Feature basic OS elements such as file system and process scheduling.
