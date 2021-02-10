@@ -61,3 +61,4 @@ dkms.conf
 
 # End of https://www.toptal.com/developers/gitignore/api/assembler,c
 *.img
+*.bin
