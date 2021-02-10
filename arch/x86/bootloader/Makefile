@@ -1,6 +1,6 @@
 all: disk.img
 
-run: all
+run: disk.img
 	qemu-system-i386 -drive format=raw,file=disk.img
 
 disk.img: loader.bin kernel_entry.bin
