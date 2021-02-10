@@ -20,6 +20,24 @@ loader:
 	mov bl, 0x0f		; color - white
 	call print_str
 
+	mov ah, 0x00		; reset disk system
+	mov dl, 0x80		; drive is hard disk drive
+	int 0x13
+
+	mov ax, 0x500
+	mov es, ax
+	mov bx, 0		; load kernel to 0x500:0000
+
+	mov ah, 0x02		; read sectors into memory
+	mov al, 0x01		; read one sector
+	mov ch, 0x00		; cylinder 0
+	mov cl, 0x01		; sector 1
+	mov dh, 0x00		; head 0
+	mov dl, 0x80		; drive is hard disk drive
+	int 0x13
+
+	jmp 0x500:0000
+
 	hlt
 
 get_cursor_pos:

@@ -1,10 +1,15 @@
-all: clean loader.img
+all: disk.img
 
-run: loader.img
-	qemu-system-i386 -drive format=raw,file=loader.img
+run: all
+	qemu-system-i386 -drive format=raw,file=disk.img
 
-loader.img: loader.S
-	nasm loader.S -o loader.img
+disk.img: loader.bin kernel_entry.bin
+	dd if=loader.bin of=disk.img
+	dd if=kernel_entry.bin of=disk.img seek=1
+	truncate -s 1024 disk.img
+
+%.bin: %.S
+	nasm -f bin $< -o $@
 
 clean:
-	rm -f *.elf *.img *.o
+	rm -f *.elf *.img *.o *.bin
