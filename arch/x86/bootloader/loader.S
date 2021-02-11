@@ -1,20 +1,22 @@
 org 0x7c00
 bits 16
+
+%include 'printfunc.S'
+
 global loader
 
 	xor ax, ax
 	mov ds, ax
 	mov es, ax
 	mov ss, ax
-	mov sp, 0x7c00
 
 loader:
-	call set_print_page
-	call get_cursor_pos
+	set_print_page
+	get_cursor_pos
 	mov cx, [ldmsg_len]
 	mov bp, ldmsg
 	mov bl, 0x0f		; color - white
-	call print_str
+	print_str
 
 	mov ah, 0x00		; reset disk system
 	mov dl, 0x80		; drive is hard disk drive
@@ -40,43 +42,24 @@ loader:
 
 	xor ax, ax
 	mov es, ax
-	call set_print_page
-	call get_cursor_pos
+	set_print_page
+	get_cursor_pos
 	mov cx, [donemsg_len]
 	mov bp, donemsg
 	mov bl, 0x02		; color - green
-	call print_str
+	print_str
 
 	jmp 0x500:0000
 
 	hlt
 
 fail:
-	call get_cursor_pos
+	get_cursor_pos
 	mov cx, [failmsg_len]
 	mov bp, failmsg
 	mov bl, 0x04		; color - red
-	call print_str
+	print_str
 	hlt
-
-get_cursor_pos:
-	mov ah, 0x03		; tell 0x10 interrupt to get cursor position
-	mov bh, 0x00		; page 0
-	int 0x10
-	ret
-
-set_print_page:
-	mov al, 0x00		; page should be 0
-	mov ah, 0x05		; set active page
-	int 0x10
-	ret
-
-print_str:
-	mov al, 0x01		; write mode
-	mov ah, 0x13		; tell 0x10 interrupt to write string
-	mov bh, 0x00		; page 0
-	int 0x10
-	ret
 
 ldmsg db 'Loading OS... '
 ldmsg_len dw $ - ldmsg

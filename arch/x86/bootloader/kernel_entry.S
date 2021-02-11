@@ -1,6 +1,8 @@
 org 0x00
 bits 16
 
+%include 'printfunc.S'
+
 global kernel_entry
 
 	xor ax, ax
