@@ -2,6 +2,10 @@
 
 #include <stdint.h>
 
+extern size_t terminal_row, terminal_col;
+extern uint8_t terminal_color;
+extern uint16_t *terminal_buf;
+
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
   return fg | (bg << 4);
 }
