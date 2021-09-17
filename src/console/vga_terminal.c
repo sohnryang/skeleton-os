@@ -32,6 +32,7 @@ void term_put_entry(char ch, uint8_t color, size_t x, size_t y) {
 }
 
 void term_put_char(char ch) {
+  // FIXME: implement terminal scrolling
   switch (ch) {
     case '\n':
       terminal_col = 0;
