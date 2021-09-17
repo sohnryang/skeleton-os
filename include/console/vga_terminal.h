@@ -22,9 +22,9 @@ enum vga_color {
   VGA_COLOR_WHITE
 };
 
-static size_t terminal_row, terminal_col;
-static uint8_t terminal_color;
-static uint16_t *terminal_buf;
+size_t terminal_row, terminal_col;
+uint8_t terminal_color;
+uint16_t *terminal_buf;
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -33,4 +33,4 @@ void init_terminal();
 void term_set_color(uint8_t color);
 void term_put_entry(char ch, uint8_t color, size_t x, size_t y);
 void term_put_char(char ch);
-void term_put_str(const char* data);
+void term_put_str(const char *data);
