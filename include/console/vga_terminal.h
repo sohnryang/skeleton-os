@@ -22,9 +22,9 @@ enum vga_color {
   VGA_COLOR_WHITE
 };
 
-size_t terminal_row, terminal_col;
-uint8_t terminal_color;
-uint16_t *terminal_buf;
+extern size_t terminal_row, terminal_col;
+extern uint8_t terminal_color;
+extern uint16_t *terminal_buf;
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
