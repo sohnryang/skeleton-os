@@ -2,10 +2,10 @@
  * vga_terminal.h -- VGA terminal output functions
  */
 
+#pragma once
+
 #include <stddef.h>
 #include <stdint.h>
-
-#pragma once
 
 enum vga_color {  // VGA color codes
   VGA_COLOR_BLACK = 0,
