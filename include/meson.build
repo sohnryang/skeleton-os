@@ -1,1 +1,2 @@
 subdir('console')
+subdir('logging')
