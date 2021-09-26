@@ -6,3 +6,7 @@ size_t kstrlen(const char* s) {
     ;
   return i;
 }
+
+void kstrcpy(char* dest, char* src) {
+  for (size_t i = 0; src[i]; ++i) dest[i] = src[i];
+}
