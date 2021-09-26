@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 // clang-format off
-// CMocka header should be included later.
+// CMocka header must be included later.
 #include <cmocka.h>
 // clang-format on
 
