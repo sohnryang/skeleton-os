@@ -21,8 +21,17 @@ static void test_kstrcpy(void **state) {
   assert_string_equal(str2, "test");
 }
 
+static void test_kstrncpy(void **state) {
+  char str1[11] = "skeletonOS";
+  char str2[9];
+  kstrncpy(str2, str1, 8);
+  str2[8] = '\0';
+  assert_string_equal(str2, "skeleton");
+}
+
 int main() {
   const struct CMUnitTest tests[] = {cmocka_unit_test(test_kstrlen),
-                                     cmocka_unit_test(test_kstrcpy)};
+                                     cmocka_unit_test(test_kstrcpy),
+                                     cmocka_unit_test(test_kstrncpy)};
   return cmocka_run_group_tests(tests, NULL, NULL);
 }
