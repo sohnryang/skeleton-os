@@ -29,9 +29,24 @@ static void test_kstrncpy(__attribute__((unused)) void **state) {
   assert_string_equal(str2, "skeleton");
 }
 
+static void test_kitoa(__attribute__((unused)) void **state) {
+  int num1 = 1234567890;
+  char str1[11];
+  kitoa(num1, str1);
+  assert_string_equal(str1, "1234567890");
+  int num2 = -1234567890;
+  char str2[12];
+  kitoa(num2, str2);
+  assert_string_equal(str2, "-1234567890");
+  int num3 = 0;
+  char str3[2];
+  kitoa(num3, str3);
+  assert_string_equal(str3, "0");
+}
+
 int main() {
-  const struct CMUnitTest tests[] = {cmocka_unit_test(test_kstrlen),
-                                     cmocka_unit_test(test_kstrcpy),
-                                     cmocka_unit_test(test_kstrncpy)};
+  const struct CMUnitTest tests[] = {
+      cmocka_unit_test(test_kstrlen), cmocka_unit_test(test_kstrcpy),
+      cmocka_unit_test(test_kstrncpy), cmocka_unit_test(test_kitoa)};
   return cmocka_run_group_tests(tests, NULL, NULL);
 }
