@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/assembler,c
-# Edit at https://www.toptal.com/developers/gitignore?templates=assembler,c
+# Created by https://www.toptal.com/developers/gitignore/api/assembler,c,meson
+# Edit at https://www.toptal.com/developers/gitignore?templates=assembler,c,meson
 
 ### Assembler ###
 *.exe
@@ -59,8 +59,28 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# End of https://www.toptal.com/developers/gitignore/api/assembler,c
-*.img
-*.bin
+### Meson ###
+# subproject directories
+/subprojects/*
+!/subprojects/*.wrap
 
+# Meson Directories
+meson-logs
+meson-private
+
+# Meson Files
+meson_benchmark_setup.dat
+meson_test_setup.dat
+sanitycheckcpp.cc     # C++ specific
+sanitycheckcpp.exe    # C++ specific
+
+# Ninja
+build.ninja
+.ninja_deps
+.ninja_logs
+
+# Misc
+compile_commands.json
+
+# End of https://www.toptal.com/developers/gitignore/api/assembler,c,meson
 .cache/
