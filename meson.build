@@ -37,7 +37,7 @@ if meson.get_external_property('libc_only', false)
 else
   os_bin = executable(
     'os.bin',
-    project_source_files,
+    [project_source_files, libc_source_files],
     include_directories : inc,
     link_args : [linker_script_flags, '-lgcc'],
     link_depends : linker_script_deps,
