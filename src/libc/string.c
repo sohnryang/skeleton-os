@@ -37,3 +37,18 @@ void kitoa(int x, char* out) {
   if (current == 0) result[current++] = '0';
   kstrncpy(out, result, current + 1);
 }
+
+static const char* hexchar = "0123456789abcdef";
+
+void kitoa_hex(int x, char* out) {
+  char result[9] = {0};  // 8 digits max + null termination
+  bool leading_zero = true;
+  size_t current = 0;
+  for (int i = 0; i < 8; ++i) {
+    size_t digit = (x >> ((7 - i) * 4)) & 15;
+    if (leading_zero && digit != 0) leading_zero = false;
+    if (!leading_zero) result[current++] = hexchar[digit];
+  }
+  if (current == 0) result[current++] = '0';
+  kstrncpy(out, result, current + 1);
+}
