@@ -44,9 +44,25 @@ static void test_kitoa(__attribute__((unused)) void **state) {
   assert_string_equal(str3, "0");
 }
 
+static void test_kitoa_hex(__attribute__((unused)) void **state) {
+  int num1 = 0xc0ffee;
+  char str1[9];
+  kitoa_hex(num1, str1);
+  assert_string_equal(str1, "c0ffee");
+  int num2 = -0xdeadbeef;
+  char str2[9];
+  kitoa_hex(num2, str2);
+  assert_string_equal(str2, "21524111");
+  int num3 = 0;
+  char str3[2];
+  kitoa_hex(num3, str3);
+  assert_string_equal(str3, "0");
+}
+
 int main() {
   const struct CMUnitTest tests[] = {
       cmocka_unit_test(test_kstrlen), cmocka_unit_test(test_kstrcpy),
-      cmocka_unit_test(test_kstrncpy), cmocka_unit_test(test_kitoa)};
+      cmocka_unit_test(test_kstrncpy), cmocka_unit_test(test_kitoa),
+      cmocka_unit_test(test_kitoa_hex)};
   return cmocka_run_group_tests(tests, NULL, NULL);
 }
