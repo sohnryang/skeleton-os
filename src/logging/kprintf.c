@@ -1,8 +1,29 @@
 #include <console/vga_terminal.h>
+#include <libc/string.h>
 #include <logging/kprintf.h>
 #include <stdarg.h>
 
-void kprintf(int loglevel, const char* fmt, ...) {
+static char log_prefix(int loglevel) {
+  switch (loglevel) {
+    case DEBUG:
+      return 'D';
+      break;
+    case INFO:
+      return 'I';
+      break;
+    case WARN:
+      return 'W';
+      break;
+    case ERROR:
+      return 'E';
+      break;
+    default:
+      return '?';
+  }
+}
+
+void kprintf(int loglevel, char* fmt, ...) {
+  term_put_char(log_prefix(loglevel));
   term_put_str("> ");
 
   va_list ap;
@@ -10,6 +31,7 @@ void kprintf(int loglevel, const char* fmt, ...) {
   while (*fmt) {
     char ch = *fmt++;
     char* s;
+    char numstr[12];
     char c;
     int d;
     void* p;
@@ -28,11 +50,23 @@ void kprintf(int loglevel, const char* fmt, ...) {
           break;
         case 'd':
           d = va_arg(ap, int);
+          kitoa(d, numstr);
+          term_put_str(numstr);
+          break;
+        case 'x':
+          d = va_arg(ap, int);
+          kitoa_hex(d, numstr);
+          term_put_str(numstr);
           break;
         case 'p':
           p = va_arg(ap, void*);
+          kitoa_hex((int)p,
+                    numstr);  // FIXME: assumes pointer size equals int size
+          term_put_str("0x");
+          term_put_str(numstr);
           break;
       }
-    }
+    } else
+      term_put_char(ch);
   }
 }

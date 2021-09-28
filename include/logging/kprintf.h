@@ -12,4 +12,4 @@ enum loglevel {
 };  // Log level DEBUG, INFO, WARN, ERROR.
 
 // Logs a kernel message. Usage is similar to printf.
-void kprintf(int loglevel, const char *fmt, ...);
+void kprintf(int loglevel, char *fmt, ...);
