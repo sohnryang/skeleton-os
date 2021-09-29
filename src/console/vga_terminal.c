@@ -1,4 +1,5 @@
 #include <console/vga_terminal.h>
+#include <libc/string.h>
 #include <stdint.h>
 
 size_t terminal_row, terminal_col;
@@ -31,18 +32,23 @@ void term_put_entry(char ch, uint8_t color, size_t x, size_t y) {
   terminal_buf[pos_to_index(x, y)] = vga_entry(ch, color);
 }
 
+static inline void scroll_one_line() {
+  terminal_row--;
+  kmemmove(terminal_buf, terminal_buf + VGA_WIDTH,
+           VGA_WIDTH * (VGA_HEIGHT - 1) * 16);
+}
+
 void term_put_char(char ch) {
-  // FIXME: implement terminal scrolling
   switch (ch) {
     case '\n':
       terminal_col = 0;
-      if (++terminal_row == VGA_HEIGHT) terminal_row = 0;
+      if (++terminal_row == VGA_HEIGHT) scroll_one_line();
       break;
     default:
       term_put_entry(ch, terminal_color, terminal_col, terminal_row);
       if (++terminal_col == VGA_WIDTH) {
         terminal_col = 0;
-        if (++terminal_row == VGA_HEIGHT) terminal_row = 0;
+        if (++terminal_row == VGA_HEIGHT) scroll_one_line();
       }
   }
 }
