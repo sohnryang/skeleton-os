@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install build tools
+      run: sudo apt-get install meson
     - uses: actions/checkout@v2
     - name: Create build directory
       run: meson setup build --native-file=native-files/libc-local.ini
