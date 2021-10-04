@@ -34,3 +34,10 @@ $ ninja
 ```
 $ qemu-system-i386 -kernel os.bin
 ```
+
+## Build Status
+
+| libc unit tests                                              | OS integration test                                       |
+| ------------------------------------------------------------ | --------------------------------------------------------- |
+| [![Run libc unit tests](https://github.com/sohnryang/skeleton-os/actions/workflows/libc-unit-test.yml/badge.svg)](https://github.com/sohnryang/skeleton-os/actions/workflows/libc-unit-test.yml) | [WIP](https://github.com/sohnryang/skeleton-os/issues/14) |
+
