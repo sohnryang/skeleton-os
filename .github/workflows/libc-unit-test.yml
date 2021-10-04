@@ -1,0 +1,19 @@
+name: Run libc unit tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create build directory
+      run: meson setup build --native-file=native-files/libc-local.ini
+    - name: Build and test
+      run: cd build && ninja test
