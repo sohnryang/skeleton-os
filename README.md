@@ -35,6 +35,22 @@ $ ninja
 $ qemu-system-i386 -kernel os.bin
 ```
 
+### local (libc test only)
+
+libc is platform-independent, so it can be built locally, for running unit tests.
+
+```
+$ meson setup build-libc --native-file=native-files/libc-local.ini
+$ cd build-libc
+$ ninja
+```
+
+Unit test can be run using `test` target.
+
+```
+$ ninja test
+```
+
 ## Build Status
 
 | libc unit tests                                              | OS integration test                                       |
