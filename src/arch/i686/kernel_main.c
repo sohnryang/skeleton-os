@@ -12,5 +12,4 @@ void kernel_main() {
   int x = 0;
   int* ptr = &x;
   kprintf(DEBUG, "Pointer to x: %p\n", ptr);
-  for (int i = 0; i < 4096; ++i) kprintf(DEBUG, "Scroll test: i = %x\n", i);
 }
