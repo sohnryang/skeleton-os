@@ -3,7 +3,7 @@ project(
   'c',
   version : '0.0.0',
   license : 'MIT',
-  default_options : ['warning_level=3']
+  default_options : ['warning_level=3', 'c_std=gnu99']
 )
 
 inc = [include_directories('include')]
