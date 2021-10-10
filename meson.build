@@ -2,6 +2,7 @@ project(
   'skeletonOS',
   'c',
   version : '0.0.0',
+  license : 'MIT',
   default_options : ['warning_level=3']
 )
 
