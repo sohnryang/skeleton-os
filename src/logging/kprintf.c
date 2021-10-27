@@ -53,6 +53,9 @@ void kprintf(int loglevel, char* fmt, ...) {
           kitoa(d, numstr);
           term_put_str(numstr);
           break;
+        case 'X':
+          term_put_str("0x");
+          // fall through
         case 'x':
           d = va_arg(ap, int);
           kitoa_hex(d, numstr);
