@@ -7,6 +7,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define VGA_WIDTH 80
+#define VGA_HEIGHT 25
+
 enum vga_color {  // VGA color codes
   VGA_COLOR_BLACK = 0,
   VGA_COLOR_BLUE,
@@ -30,9 +33,6 @@ extern size_t terminal_row, terminal_col;  // current locatio of cursor
 extern uint8_t terminal_color;  // current background, foreground color of texts
                                 // being printed
 extern uint16_t *terminal_buf;  // terminal buffer.
-
-static const size_t VGA_WIDTH = 80;   // VGA terminal width
-static const size_t VGA_HEIGHT = 25;  // VGA terminal height
 
 // Initializes the terminal output by setting terminal_* variables
 void init_terminal();
