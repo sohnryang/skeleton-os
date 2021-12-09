@@ -1,4 +1,5 @@
 #include <console/vga_terminal.h>
+#include <drivers/iobus.h>
 #include <libc/string.h>
 #include <stdint.h>
 
@@ -56,4 +57,11 @@ void term_put_char(char ch) {
 
 void term_put_str(const char *data) {
   for (int i = 0; data[i]; ++i) term_put_char(data[i]);
+}
+
+void term_move_cursor(uint16_t pos) {
+  outb(VGA_FRAMEBUF_CMD_PORT, VGA_HIGH_BYTE_CMD);
+  outb(VGA_FRAMEBUF_DATA_PORT, (pos >> 8) & 0xff);
+  outb(VGA_FRAMEBUF_CMD_PORT, VGA_LOW_BYTE_CMD);
+  outb(VGA_FRAMEBUF_DATA_PORT, pos & 0xff);
 }

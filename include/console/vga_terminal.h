@@ -7,6 +7,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define VGA_FRAMEBUF_ADDR 0xb8000
+#define VGA_FRAMEBUF_CMD_PORT 0x3d4
+#define VGA_FRAMEBUF_DATA_PORT 0x3d5
+#define VGA_HIGH_BYTE_CMD 14
+#define VGA_LOW_BYTE_CMD 15
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
 
@@ -49,3 +54,6 @@ void term_put_char(char ch);
 
 // Puts a string to VGA terminal
 void term_put_str(const char *data);
+
+// Moves the cursor to specified location
+void term_move_cursor(uint16_t pos);
