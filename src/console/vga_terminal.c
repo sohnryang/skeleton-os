@@ -21,11 +21,11 @@ void init_terminal() {
   terminal_row = 0;
   terminal_col = 0;
   terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GRAY, VGA_COLOR_BLACK);
-  terminal_buf = (uint16_t *)0xb8000;  // FIXME: framebuffer address can differ
-                                       // between platforms
+  terminal_buf = (uint16_t *)VGA_FRAMEBUF_ADDR;
   for (size_t y = 0; y < VGA_HEIGHT; ++y)
     for (size_t x = 0; x < VGA_WIDTH; ++x)
       terminal_buf[pos_to_index(x, y)] = vga_entry(' ', terminal_color);
+  term_move_cursor(0);
 }
 
 void term_set_color(uint8_t color) { terminal_color = color; }
@@ -53,6 +53,7 @@ void term_put_char(char ch) {
         if (++terminal_row == VGA_HEIGHT) scroll_one_line();
       }
   }
+  term_move_cursor(terminal_row * VGA_WIDTH + terminal_col);
 }
 
 void term_put_str(const char *data) {
